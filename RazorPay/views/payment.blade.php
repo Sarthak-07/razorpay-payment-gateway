@@ -12,8 +12,8 @@
   <input type="hidden" name="currency" value="INR"/>
   <input type="hidden" name="order_id" value="{{ $id }}"/>
   <input type="hidden" name="name" value="{{ config('app.name', 'Paymenter') }}"/>
-  <input type="hidden" name="callback_url" value="{{ url('/invoices/' . $invoiceId) }}"/>
-  <input type="hidden" name="cancel_url" value="{{ route('clients.invoice.show', $invoiceId) }}"/>
+  <input type="hidden" name="callback_url" value="{{ route('razorpay.callback', ['invoiceId' => $invoiceId]) }}"/>
+  <input type="hidden" name="cancel_url" value="{{ route('razorpay.cancel', ['invoiceId' => $invoiceId]) }}"/>
 </form>
 
 <script>
