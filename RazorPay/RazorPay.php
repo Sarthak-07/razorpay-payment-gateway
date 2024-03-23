@@ -18,7 +18,7 @@ class RazorPay extends Gateway
     {
         return [
             'display_name' => 'RazorPay',
-            'version' => '1.0.0',
+            'version' => '1.0.1',
             'author' => 'Sarthak',
             'website' => 'https://stellarhost.tech',
         ];
@@ -41,6 +41,13 @@ class RazorPay extends Gateway
             [
                 'name' => 'razorpay_secret_key',
                 'friendlyName' => 'RazorPay Secret Key',
+                'type' => 'text',
+                'required' => true,
+            ],
+            [
+
+                'name' => 'razorpay_webhook_secret',
+                'friendlyName' => 'RazorPay Webhook Secret',
                 'type' => 'text',
                 'required' => true,
             ],
@@ -116,7 +123,7 @@ class RazorPay extends Gateway
      */
     public function webhook(Request $request)
     {
-        $webhookSecret = ExtensionHelper::getConfig('RazorPay', 'test_mode') ? ExtensionHelper::getConfig('RazorPay', 'test_secret_key') : ExtensionHelper::getConfig('RazorPay', 'razorpay_secret_key');
+        $webhookSecret = ExtensionHelper::getConfig('RazorPay', 'razorpay_webhook_secret');
 
         $signature = $request->header('X-Razorpay-Signature');
         $webhookBody = file_get_contents('php://input');
